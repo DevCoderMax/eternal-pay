@@ -57,14 +57,21 @@ class AnonymousConverter {
             this.updateConvertButtonState();
             this.updateConversionDetails();
         });
+
+        // Desabilitando temporariamente o botão de troca
+        this.swapButton.disabled = true;
+        this.swapButton.classList.add('disabled');
         
         this.swapButton.addEventListener('click', () => {
-            this.handleSwap();
-            this.updateConvertButtonState();
-            this.updateConversionDetails();
-            this.updateAddressField();
+            // Função mantida para futura ativação
+            if (!this.swapButton.disabled) {
+                this.handleSwap();
+                this.updateConvertButtonState();
+                this.updateConversionDetails();
+                this.updateAddressField();
+            }
         });
-
+        
         this.addressInput.addEventListener('input', () => {
             this.validateAddress();
             this.updateConvertButtonState();

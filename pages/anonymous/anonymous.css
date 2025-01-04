@@ -119,6 +119,16 @@ input[type="number"]:disabled {
     background: #fff;
 }
 
+.swap-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #e0e0e0;
+}
+
+.swap-button.disabled:hover {
+    background-color: #e0e0e0;
+}
+
 /* Painel de Ação */
 .action-panel {
     text-align: center;
