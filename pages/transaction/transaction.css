@@ -1,0 +1,279 @@
+.transaction-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 80px auto 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    max-width: 800px;
+}
+
+.transaction-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.transaction-header h2 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.transaction-id {
+    color: #ccc;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.status-message {
+    color: #ffd700;
+    font-size: 1em;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 215, 0, 0.1);
+    border-radius: 4px;
+    text-align: center;
+}
+
+.status-message.pending {
+    color: #ffd700;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.status-message.processing {
+    color: #00bfff;
+    background: rgba(0, 191, 255, 0.1);
+}
+
+.status-message.completed {
+    color: #00ff00;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.status-message.cancelled {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+}
+
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+    padding-left: 120px;
+    opacity: 0.5;
+}
+
+.timeline-item.active {
+    opacity: 1;
+}
+
+.timeline-item.active .timeline-icon {
+    background: #1a1a1a;
+    border-color: #00ff00;
+}
+
+.timeline-item.active#stepCancelled .timeline-icon {
+    border-color: #ff4444;
+}
+
+.timeline-item#stepCancelled .timeline-icon i {
+    color: #ff4444;
+}
+
+.timeline-icon {
+    position: absolute;
+    left: 35px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.timeline-item.completed .timeline-icon {
+    background: #4CAF50;
+    color: #fff;
+}
+
+.timeline-content {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.timeline-content h3 {
+    margin: 0 0 10px;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+.timeline-content p {
+    margin: 0;
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.timestamp {
+    display: block;
+    margin-top: 8px;
+    color: #999;
+    font-size: 0.8em;
+}
+
+.transaction-details {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.detail-label {
+    color: #ccc;
+}
+
+.detail-value {
+    color: #fff;
+    font-weight: 500;
+}
+
+.pix-payment {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.qr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.qr-code {
+    width: 200px;
+    height: 200px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+.payment-instructions {
+    color: #fff;
+    margin-top: 15px;
+}
+
+.payment-instructions p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+#pixValue {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.pix-copy {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copy-button-container {
+    position: relative;
+    display: inline-block;
+}
+
+.copy-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #ffd700;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.copy-button:hover {
+    background: #ffed4a;
+}
+
+.copy-button i {
+    font-size: 16px;
+}
+
+.copy-feedback {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.copy-feedback.show {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-item {
+        padding-left: 80px;
+    }
+
+    .timeline-icon {
+        left: 15px;
+    }
+}

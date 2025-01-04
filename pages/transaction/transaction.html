@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Pay - Status da Transação</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="transaction.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- O header será inserido aqui pelo internal-header.js -->
+    
+    <div class="container">
+        <div class="transaction-panel">
+            <div class="transaction-header">
+                <h2>Status da Transação</h2>
+                <div class="transaction-id">ID: <span id="transactionId">Carregando...</span></div>
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item" id="stepCreated">
+                    <div class="timeline-icon">
+                        <i class="fas fa-file-invoice"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Transação Criada</h3>
+                        <p>Efetue o pagamento</p>
+                        <div id="pixPayment" class="pix-payment">
+                            <div class="qr-container">
+                                <img id="pixQRCode" class="qr-code" alt="QR Code Pix">
+                                <div class="payment-instructions">
+                                    <p>Escaneie o QR Code acima com seu aplicativo de pagamento</p>
+                                    <p>Valor a pagar: <span id="pixValue">-</span></p>
+                                    <div class="pix-copy">
+                                        <p>Ou copie o código Pix:</p>
+                                        <div class="copy-button-container">
+                                            <button id="copyPixCode" class="copy-button">
+                                                <i class="fas fa-copy"></i>
+                                                Copiar código Pix
+                                            </button>
+                                            <span id="copyFeedback" class="copy-feedback">Copiado!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="timestamp" id="createdTime">-</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="stepProcessing">
+                    <div class="timeline-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Em Processamento</h3>
+                        <p>Convertendo valores</p>
+                        <span class="timestamp" id="processingTime">-</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="stepCompleted">
+                    <div class="timeline-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Concluída</h3>
+                        <p>Transação finalizada com sucesso</p>
+                        <span class="timestamp" id="completedTime">-</span>
+                    </div>
+                </div>
+
+                <div class="timeline-item" id="stepCancelled">
+                    <div class="timeline-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Cancelada</h3>
+                        <p>Transação foi cancelada</p>
+                        <span class="timestamp" id="cancelledTime">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="transaction-details">
+                <div class="detail-item">
+                    <span class="detail-label">Valor Original:</span>
+                    <span class="detail-value" id="originalValue">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Taxa de Conversão:</span>
+                    <span class="detail-value" id="conversionRate">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Valor Final:</span>
+                    <span class="detail-value" id="finalValue">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Destino:</span>
+                    <span class="detail-value" id="destinationAddress">-</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../config.js"></script>
+    <script src="../../components/header/internal-header.js"></script>
+    <script src="transaction.js"></script>
+</body>
+</html>

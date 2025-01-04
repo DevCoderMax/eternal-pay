@@ -1,0 +1,5 @@
+HOST = 'localhost'
+DATABASE_NAME = 'eternal_pay'
+PORT = '5432'
+USER = 'postgres'
+PASSWORD = 'postgres'

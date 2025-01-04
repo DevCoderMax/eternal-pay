@@ -1,0 +1,285 @@
+.container {
+    max-width: 800px;
+    margin: 120px auto 50px; /* Aumentado para dar espaço ao header fixo */
+    padding: 20px;
+}
+
+/* Painel de Taxas */
+.rates-panel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.rate-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    text-align: center;
+}
+
+.rate-item i {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #ffd700;
+}
+
+.rate-label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.rate-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* Painel do Conversor */
+.converter-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+}
+
+.converter-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.currency-input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.currency-symbol {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffd700;
+    font-size: 24px;
+}
+
+.currency-symbol span {
+    font-size: 18px;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+input[type="number"]:disabled {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.1);
+    cursor: not-allowed;
+}
+
+.swap-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: #ffd700;
+    color: #1a1a1a;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.swap-button:hover {
+    transform: rotate(180deg);
+    background: #fff;
+}
+
+/* Painel de Ação */
+.action-panel {
+    text-align: center;
+}
+
+.convert-button {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffd700, #ffa500);
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.convert-button:disabled {
+    background: linear-gradient(135deg, #808080, #666666);
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.7;
+}
+
+.convert-button:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.convert-button i {
+    font-size: 20px;
+}
+
+/* Animação de loading */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.convert-button.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.rates-panel, .converter-panel, .action-panel {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.conversion-details {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    font-size: 0.9em;
+}
+
+.conversion-details > div {
+    margin: 8px 0;
+    color: #ccc;
+}
+
+.fee-info span, .final-value span {
+    color: #fff;
+    font-weight: 500;
+}
+
+.final-value {
+    font-size: 1.1em;
+}
+
+.final-value span {
+    color: #ffd700;
+}
+
+.limit-warning {
+    text-align: center;
+    color: #666;
+    margin-bottom: 15px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.address-panel {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.address-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.address-input-container label {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.address-input-container input {
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.address-input-container input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.address-input-container input:focus {
+    border-color: #ffd700;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 14px;
+    margin-top: 4px;
+    min-height: 20px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        margin: 100px 20px 30px;
+    }
+
+    .rates-panel {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .converter-container {
+        flex-direction: column;
+    }
+
+    .swap-button {
+        transform: rotate(90deg);
+    }
+
+    .swap-button:hover {
+        transform: rotate(270deg);
+    }
+}

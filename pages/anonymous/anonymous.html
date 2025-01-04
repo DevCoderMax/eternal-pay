@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Pay - Conversão Anônima</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="anonymous.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- O header será inserido aqui pelo internal-header.js -->
+    
+    <div class="container">
+        <div class="rates-panel">
+            <div class="rate-item">
+                <i class="fab fa-bitcoin"></i>
+                <span class="rate-label">BTC/USD</span>
+                <span class="rate-value" id="btcUsdRate">Carregando...</span>
+            </div>
+            <div class="rate-item">
+                <i class="fab fa-bitcoin"></i>
+                <span class="rate-label">BTC/BRL</span>
+                <span class="rate-value" id="btcBrlRate">Carregando...</span>
+            </div>
+            <div class="rate-item">
+                <i class="fas fa-dollar-sign"></i>
+                <span class="rate-label">USD/BRL</span>
+                <span class="rate-value" id="usdBrlRate">Carregando...</span>
+            </div>
+        </div>
+
+        <div class="converter-panel">
+            <div class="limit-warning">
+                Limites de conversão: Mínimo R$ 1,00 - Máximo R$ 100,00
+            </div>
+            <div class="converter-container">
+                <div class="currency-input">
+                    <div class="currency-symbol">
+                        <i class="fas fa-brazilian-real-sign"></i>
+                        <span>BRL</span>
+                    </div>
+                    <input type="number" id="brlInput" placeholder="0.00" step="0.01" min="0">
+                </div>
+
+                <button class="swap-button" id="swapButton">
+                    <i class="fas fa-exchange-alt"></i>
+                </button>
+
+                <div class="currency-input">
+                    <div class="currency-symbol">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>BTC</span>
+                    </div>
+                    <input type="number" id="btcInput" placeholder="0.00000000" step="0.00000001" min="0">
+                </div>
+            </div>
+
+            <div class="conversion-details">
+                <div class="fee-info">Taxa de conversão (1%): <span id="feeAmount">-</span></div>
+                <div class="final-value">Valor final: <span id="finalAmount">-</span></div>
+            </div>
+        </div>
+
+        <div class="address-panel">
+            <div class="address-input-container">
+                <label for="addressInput" id="addressLabel">Endereço da Carteira Lightning Network</label>
+                <input type="text" id="addressInput" placeholder="Endereço ln... ou email">
+                <div id="addressError" class="error-message"></div>
+            </div>
+        </div>
+
+        <div class="action-panel">
+            <button class="convert-button" id="convertButton">
+                <i class="fas fa-lock"></i>
+                <span id="convertButtonText">Converter Anonimamente</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="../../config.js"></script>
+    <script src="../../components/header/internal-header.js"></script>
+    <script src="anonymous.js"></script>
+</body>
+</html>
