@@ -112,6 +112,50 @@ input[type="number"]:disabled {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.swap-button[title] {
+    cursor: help;
+}
+
+.swap-button[title]::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 1000;
+    margin-bottom: 5px;
+}
+
+.swap-button[title]::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.8);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    margin-bottom: -6px;
+}
+
+.swap-button[title]:hover::before,
+.swap-button[title]:hover::after {
+    visibility: visible;
+    opacity: 1;
 }
 
 .swap-button:hover {
