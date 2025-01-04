@@ -8,7 +8,7 @@ class AnonymousConverter {
         this.isUpdating = false;
         this.conversionFee = 0.01; // 1% de taxa
         this.minBrlValue = 1.00;   // Valor mínimo em BRL
-        this.maxBrlValue = 100.00; // Valor máximo em BRL
+        this.maxBrlValue = 200.00; // Valor máximo em BRL
         this.setupElements();
         this.setupEventListeners();
         this.updateConvertButtonState(); // Atualiza estado inicial do botão
