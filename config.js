@@ -14,14 +14,27 @@ const formatPrice = (price, currency) => {
 // Função para buscar as cotações
 const fetchCotacoes = async () => {
     try {
-        const url = API_URL.replace('http://', 'https://') + '/cotacoes';
-        const response = await fetch(url, {
+        // Garante que estamos usando HTTPS
+        const baseUrl = new URL(API_URL);
+        baseUrl.protocol = 'https:';
+        const url = new URL('/cotacoes', baseUrl);
+
+        console.log('Fazendo requisição para:', url.toString()); // Log para debug
+
+        const response = await fetch(url.toString(), {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            }
+            },
+            mode: 'cors', // Adiciona modo CORS explícito
+            cache: 'no-cache' // Desativa cache
         });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
         
         // Criar um objeto com os valores das cotações
