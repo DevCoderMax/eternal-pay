@@ -14,7 +14,14 @@ const formatPrice = (price, currency) => {
 // Função para buscar as cotações
 const fetchCotacoes = async () => {
     try {
-        const response = await fetch(API_URL + '/cotacoes');
+        const url = API_URL.replace('http://', 'https://') + '/cotacoes';
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
         const data = await response.json();
         
         // Criar um objeto com os valores das cotações
