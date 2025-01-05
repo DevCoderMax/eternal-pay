@@ -40,8 +40,14 @@ const fetchCotacoes = async () => {
                     'Content-Type': 'application/json'
                 },
                 mode: 'cors',
+                redirect: 'follow', // Seguir redirecionamentos automaticamente
                 cache: 'no-cache'
             });
+
+            // Se for redirecionamento, usar a nova URL
+            if (response.redirected) {
+                console.log('Redirecionado para:', response.url);
+            }
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -63,7 +69,6 @@ const fetchCotacoes = async () => {
             console.error(`Tentativa ${attempt + 1} falhou:`, error);
             lastError = error;
             
-            // Espera um pouco antes de tentar novamente
             if (attempt < maxRetries - 1) {
                 await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
             }

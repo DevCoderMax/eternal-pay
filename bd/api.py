@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Request
 from sqlalchemy import create_engine, Column, Integer, String, Numeric, DateTime, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, Session
@@ -60,6 +60,12 @@ def get_db():
         db.close()
 
 app = FastAPI(title="Eternal Pay API")
+
+# Middleware para forçar HTTPS
+@app.middleware("http")
+async def force_https(request: Request, call_next):
+    response = await call_next(request)
+    return response
 
 # Configurar CORS
 app.add_middleware(
