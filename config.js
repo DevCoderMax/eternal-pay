@@ -11,6 +11,18 @@ const formatPrice = (price, currency) => {
     }).format(price);
 };
 
+// Função para garantir que a URL use HTTPS
+const ensureHttps = (url) => {
+    // Se estamos em HTTPS, garantimos que a API também use HTTPS
+    if (window.location.protocol === 'https:') {
+        return url.replace(/^http:\/\//i, 'https://');
+    }
+    return url;
+};
+
+// Configurações globais
+const API_URL = ensureHttps('https://max-apiepay.uvxtdw.easypanel.host');
+
 // Função para buscar as cotações
 const fetchCotacoes = async () => {
     const maxRetries = 3;
@@ -18,21 +30,16 @@ const fetchCotacoes = async () => {
 
     for (let attempt = 0; attempt < maxRetries; attempt++) {
         try {
-            // Garante que estamos usando HTTPS
-            const baseUrl = new URL(API_URL);
-            baseUrl.protocol = 'https:';
-            const url = new URL('/cotacoes', baseUrl);
+            const url = `${API_URL}/cotacoes`;
+            console.log(`Tentativa ${attempt + 1}/${maxRetries} - Fazendo requisição para:`, url);
 
-            console.log(`Tentativa ${attempt + 1}/${maxRetries} - Fazendo requisição para:`, url.toString());
-
-            const response = await fetch(url.toString(), {
+            const response = await fetch(url, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
                 mode: 'cors',
-                credentials: 'same-origin',
                 cache: 'no-cache'
             });
 
@@ -56,7 +63,7 @@ const fetchCotacoes = async () => {
             console.error(`Tentativa ${attempt + 1} falhou:`, error);
             lastError = error;
             
-            // Espera um pouco antes de tentar novamente (exponential backoff)
+            // Espera um pouco antes de tentar novamente
             if (attempt < maxRetries - 1) {
                 await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
             }
