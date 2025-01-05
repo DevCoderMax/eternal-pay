@@ -64,7 +64,12 @@ app = FastAPI(title="Eternal Pay API")
 # Configurar CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Permite todas as origens em desenvolvimento
+    allow_origins=[
+        "https://max-epayweb.uvxtdw.easypanel.host",
+        "http://max-epayweb.uvxtdw.easypanel.host",
+        "https://max-apiepay.uvxtdw.easypanel.host",
+        "http://max-apiepay.uvxtdw.easypanel.host"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

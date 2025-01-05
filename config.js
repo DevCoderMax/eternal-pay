@@ -13,44 +13,58 @@ const formatPrice = (price, currency) => {
 
 // Função para buscar as cotações
 const fetchCotacoes = async () => {
-    try {
-        // Garante que estamos usando HTTPS
-        const baseUrl = new URL(API_URL);
-        baseUrl.protocol = 'https:';
-        const url = new URL('/cotacoes', baseUrl);
+    const maxRetries = 3;
+    let lastError = null;
 
-        console.log('Fazendo requisição para:', url.toString()); // Log para debug
+    for (let attempt = 0; attempt < maxRetries; attempt++) {
+        try {
+            // Garante que estamos usando HTTPS
+            const baseUrl = new URL(API_URL);
+            baseUrl.protocol = 'https:';
+            const url = new URL('/cotacoes', baseUrl);
 
-        const response = await fetch(url.toString(), {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors', // Adiciona modo CORS explícito
-            cache: 'no-cache' // Desativa cache
-        });
+            console.log(`Tentativa ${attempt + 1}/${maxRetries} - Fazendo requisição para:`, url.toString());
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const response = await fetch(url.toString(), {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors',
+                credentials: 'same-origin',
+                cache: 'no-cache'
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            // Criar um objeto com os valores das cotações
+            const cotacoes = {};
+            data.forEach(item => {
+                cotacoes[item.par_moedas] = {
+                    valor: item.valor,
+                    atualizado_em: new Date(item.atualizado_em)
+                };
+            });
+            
+            return cotacoes;
+        } catch (error) {
+            console.error(`Tentativa ${attempt + 1} falhou:`, error);
+            lastError = error;
+            
+            // Espera um pouco antes de tentar novamente (exponential backoff)
+            if (attempt < maxRetries - 1) {
+                await new Promise(resolve => setTimeout(resolve, Math.pow(2, attempt) * 1000));
+            }
         }
-
-        const data = await response.json();
-        
-        // Criar um objeto com os valores das cotações
-        const cotacoes = {};
-        data.forEach(item => {
-            cotacoes[item.par_moedas] = {
-                valor: item.valor,
-                atualizado_em: new Date(item.atualizado_em)
-            };
-        });
-        
-        return cotacoes;
-    } catch (error) {
-        console.error('Erro ao buscar cotações:', error);
-        throw error;
     }
+
+    console.error('Todas as tentativas falharam. Último erro:', lastError);
+    throw lastError;
 };
 
 // Função para formatar a data de atualização
