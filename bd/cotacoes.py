@@ -26,7 +26,7 @@ Base.metadata.create_all(bind=engine)
 
 class CotacaoService:
     def __init__(self):
-        self.BASE_URL = 'http://0.0.0.0:5006'
+        self.BASE_URL = 'https://max-apiscrapercripto.uvxtdw.easypanel.host'
         self.session = SessionLocal()
         self.ultima_atualizacao_usdbrl = datetime.min
 
