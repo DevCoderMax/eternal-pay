@@ -1,5 +1,5 @@
 // Configurações globais
-const API_URL = 'https://c6eafc1aa28dc0bf3776f07f75ae9f76.serveo.net';
+const API_URL = 'https://dd04ef8676fafd33d9784559f5b56009.serveo.net';
 
 // Função para formatar o preço
 const formatPrice = (price, currency) => {
