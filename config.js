@@ -1,5 +1,5 @@
 // Configurações globais
-const API_URL = 'https://8703152ee3d4e5ade6fc9be1bfe48325.serveo.net';
+const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
 
 // Função para formatar o preço
 const formatPrice = (price, currency) => {
