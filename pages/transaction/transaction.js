@@ -1,3 +1,6 @@
+// Import required functions from config.js
+import { API_URL, formatPrice } from '../../config.js';
+
 class TransactionStatus {
     constructor() {
         this.transactionId = new URLSearchParams(window.location.search).get('id');

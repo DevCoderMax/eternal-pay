@@ -1,3 +1,6 @@
+// Import required functions from config.js
+import { API_URL, fetchCotacoes, formatPrice } from '../../config.js';
+
 class HeaderComponent {
     constructor() {
         this.priceBrlElement = null;

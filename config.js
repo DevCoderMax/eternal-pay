@@ -1,8 +1,8 @@
 // Configurações globais
-const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
+export const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
 
 // Função para formatar o preço
-const formatPrice = (price, currency) => {
+export const formatPrice = (price, currency) => {
     return new Intl.NumberFormat('pt-BR', {
         style: 'currency',
         currency: currency,
@@ -12,7 +12,7 @@ const formatPrice = (price, currency) => {
 };
 
 // Função para garantir que a URL use HTTPS
-const ensureHttps = (url) => {
+export const ensureHttps = (url) => {
     // Se estamos em HTTPS, garantimos que a API também use HTTPS
     if (window.location.protocol === 'https:') {
         return url.replace(/^http:\/\//i, 'https://');
@@ -20,11 +20,8 @@ const ensureHttps = (url) => {
     return url;
 };
 
-// Configurações globais
-const API_URL = ensureHttps('https://max-apiepay.uvxtdw.easypanel.host');
-
 // Função para buscar as cotações
-const fetchCotacoes = async () => {
+export const fetchCotacoes = async () => {
     const maxRetries = 3;
     let lastError = null;
 
@@ -39,15 +36,8 @@ const fetchCotacoes = async () => {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
                 },
-                mode: 'cors',
-                redirect: 'follow', // Seguir redirecionamentos automaticamente
-                cache: 'no-cache'
+                mode: 'cors'
             });
-
-            // Se for redirecionamento, usar a nova URL
-            if (response.redirected) {
-                console.log('Redirecionado para:', response.url);
-            }
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -58,6 +48,8 @@ const fetchCotacoes = async () => {
             // Criar um objeto com os valores das cotações
             const cotacoes = {};
             data.forEach(item => {
+                // Remove a barra do par de moedas para manter compatibilidade
+                const parMoedas = item.par_moedas.replace('/', '_');
                 cotacoes[item.par_moedas] = {
                     valor: item.valor,
                     atualizado_em: new Date(item.atualizado_em)
@@ -80,20 +72,10 @@ const fetchCotacoes = async () => {
 };
 
 // Função para formatar a data de atualização
-const formatarDataAtualizacao = (data) => {
+export const formatarDataAtualizacao = (data) => {
     return new Intl.DateTimeFormat('pt-BR', {
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit'
     }).format(data);
 };
-
-// Exporta as funções para uso em outros arquivos
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        API_URL,
-        formatPrice,
-        fetchCotacoes,
-        formatarDataAtualizacao
-    };
-}
