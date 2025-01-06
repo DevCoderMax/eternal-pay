@@ -20,7 +20,7 @@ class InternalHeader {
                     <ul class="nav-links">
                         <li><a href="/"><i class="fas fa-home"></i> Início</a></li>
                         <li><a href="#converter"><i class="fas fa-exchange-alt"></i> Converter</a></li>
-                        <li><a href="#sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
+                        <li><a href="/pages/sobre.html"><i class="fas fa-info-circle"></i> Sobre</a></li>
                     </ul>
                 </nav>
             </header>
