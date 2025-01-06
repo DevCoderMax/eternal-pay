@@ -264,6 +264,28 @@
     opacity: 1;
 }
 
+.processing-info, .confirmation-info {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.processing-info p, .confirmation-info p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.processing-info i, .confirmation-info i {
+    margin-right: 8px;
+    color: #0066cc;
+}
+
+.fa-clock {
+    color: #ff9900 !important;
+}
+
 @media (max-width: 768px) {
     .timeline::before {
         left: 30px;
