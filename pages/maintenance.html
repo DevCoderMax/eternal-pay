@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Manutenção - Eternal Pay</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .maintenance-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .maintenance-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            animation: wrench 2.5s ease infinite;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .maintenance-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .maintenance-message {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .estimated-time {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes wrench {
+            0% {
+                transform: rotate(0deg);
+            }
+            20%, 90% {
+                transform: rotate(0deg);
+            }
+            30%, 40% {
+                transform: rotate(15deg);
+            }
+            50%, 60% {
+                transform: rotate(-15deg);
+            }
+            70%, 80% {
+                transform: rotate(15deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .social-links {
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: #4facfe;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #00f2fe;
+        }
+    </style>
+</head>
+<body>
+    <div class="maintenance-container">
+        <i class="fas fa-wrench maintenance-icon"></i>
+        <h1 class="maintenance-title">Site em Manutenção</h1>
+        <p class="maintenance-message">
+            Estamos realizando algumas melhorias para tornar sua experiência ainda melhor.
+            O sistema estará de volta em breve com novidades!
+        </p>
+        <div class="estimated-time">
+            <p>Previsão de retorno: Em breve</p>
+        </div>
+        <div class="social-links">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://t.me" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-telegram"></i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

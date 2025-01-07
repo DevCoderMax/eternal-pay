@@ -1,4 +1,9 @@
+import { checkMaintenance } from './config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar modo de manutenção antes de qualquer outra operação
+    checkMaintenance();
+
     // Animação de entrada dos elementos
     const animateHeroElements = () => {
         const heroElements = document.querySelectorAll('.hero > *');

@@ -1,4 +1,9 @@
+import { checkMaintenance } from '../../config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Verificar modo de manutenção antes de qualquer outra operação
+    checkMaintenance();
+
     // Animação de entrada dos cards
     const cards = document.querySelectorAll('.choice-card');
     cards.forEach((card, index) => {

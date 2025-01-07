@@ -1,6 +1,26 @@
 // Configurações globais
 export const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
 
+// Configuração do modo de manutenção
+export const MAINTENANCE_MODE = true;
+
+// Páginas que não devem redirecionar mesmo em modo de manutenção
+const MAINTENANCE_WHITELIST = [
+    '/pages/maintenance.html',
+    'maintenance.html'
+];
+
+export function checkMaintenance() {
+    if (MAINTENANCE_MODE) {
+        const currentPath = window.location.pathname;
+        const isWhitelisted = MAINTENANCE_WHITELIST.some(path => currentPath.endsWith(path));
+        
+        if (!isWhitelisted) {
+            window.location.href = '/pages/maintenance.html';
+        }
+    }
+}
+
 // Função para formatar o preço
 export const formatPrice = (price, currency) => {
     return new Intl.NumberFormat('pt-BR', {
