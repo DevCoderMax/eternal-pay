@@ -21,6 +21,11 @@ export function checkMaintenance() {
     }
 }
 
+// Executar verificação de manutenção automaticamente quando o arquivo for carregado
+if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', checkMaintenance);
+}
+
 // Função para formatar o preço
 export const formatPrice = (price, currency) => {
     return new Intl.NumberFormat('pt-BR', {
