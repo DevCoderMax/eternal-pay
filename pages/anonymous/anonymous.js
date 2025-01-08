@@ -1,5 +1,5 @@
 // Import required functions from config.js
-import { API_URL, fetchCotacoes, formatPrice } from '../../config.js';
+import { API_URL, fetchCotacoes, formatPrice, checkMaintenance, MAINTENANCE_MODE } from '../../config.js';
 
 class AnonymousConverter {
     constructor() {
@@ -402,5 +402,11 @@ class AnonymousConverter {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    new AnonymousConverter();
+    // Verifica o modo de manutenção antes de inicializar a aplicação
+    checkMaintenance();
+    
+    // Só inicializa se não estiver em manutenção
+    if (!MAINTENANCE_MODE) {
+        new AnonymousConverter();
+    }
 });
