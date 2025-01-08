@@ -9,7 +9,7 @@ class AnonymousConverter {
         this.isSwapped = false;
         this.lastInputValue = null;
         this.isUpdating = false;
-        this.conversionFee = 0.01; // 1% de taxa
+        this.conversionFee = 0.02; // 2% de taxa
         this.minBrlValue = 100.00;   // Valor mínimo em BRL
         this.maxBrlValue = 1000.00; // Valor máximo em BRL
         this.setupElements();
