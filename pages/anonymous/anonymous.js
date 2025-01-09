@@ -134,18 +134,23 @@ class AnonymousConverter {
         const value = parseFloat(activeInput.value) || 0;
 
         if (value > 0) {
-            let brlValue;
             if (this.isSwapped) {
-                brlValue = value * this.btcBrlRate;
+                // BTC para BRL
+                const brlValue = value * this.btcBrlRate;
+                const fee = brlValue * this.conversionFee;
+                const finalAmount = brlValue - fee;
+                
+                this.feeAmountElement.textContent = this.formatValue(fee, false);
+                this.finalAmountElement.textContent = this.formatValue(finalAmount, false);
             } else {
-                brlValue = value;
+                // BRL para BTC
+                const btcValue = value / this.btcBrlRate;
+                const btcFee = btcValue * this.conversionFee;
+                const finalBtcAmount = btcValue - btcFee;
+                
+                this.feeAmountElement.textContent = this.formatValue(btcFee, true);
+                this.finalAmountElement.textContent = this.formatValue(finalBtcAmount, true);
             }
-
-            const fee = brlValue * this.conversionFee;
-            const finalAmount = brlValue - fee;
-            
-            this.feeAmountElement.textContent = this.formatValue(fee, false);
-            this.finalAmountElement.textContent = this.formatValue(finalAmount, false);
         } else {
             this.feeAmountElement.textContent = '-';
             this.finalAmountElement.textContent = '-';

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eternal Pay - Sistema Bloqueado</title>
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../../components/header/header.css">
+    <link rel="stylesheet" href="blocked.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- O header será inserido aqui pelo internal-header.js -->
+    
+    <div class="container">
+        <div class="blocked-panel">
+            <div class="blocked-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h1>Sistema Bloqueado</h1>
+            <p class="message">O sistema está temporariamente bloqueado</p>
+            
+            <div class="operation-hours">
+                <h2>Horário de Funcionamento</h2>
+                <p>Segunda a Domingo: 06:00 às 22:00</p>
+            </div>
+
+            <div class="countdown-container">
+                <p>O sistema será desbloqueado em:</p>
+                <div class="countdown">
+                    <div class="time-block">
+                        <span id="hours">00</span>
+                        <label>Horas</label>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-block">
+                        <span id="minutes">00</span>
+                        <label>Minutos</label>
+                    </div>
+                    <div class="time-separator">:</div>
+                    <div class="time-block">
+                        <span id="seconds">00</span>
+                        <label>Segundos</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../config.js"></script>
+    <script type="module" src="../../components/header/internal-header.js"></script>
+    <script type="module" src="blocked.js"></script>
+</body>
+</html>

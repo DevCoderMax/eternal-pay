@@ -1,14 +1,36 @@
 // Configurações globais
-export const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
+export const API_URL = 'http://localhost:3000';
 
 // Configuração do modo de manutenção
 export const MAINTENANCE_MODE = false;
+
+// Horário de funcionamento
+export const OPERATION_HOURS = {
+    start: 6,  // 6:00
+    end: 22    // 22:00
+};
 
 // Páginas que não devem redirecionar mesmo em modo de manutenção
 const MAINTENANCE_WHITELIST = [
     '/pages/maintenance.html',
     'maintenance.html'
 ];
+
+// Verifica se o sistema está no horário de funcionamento
+export function checkOperatingHours() {
+    const now = new Date();
+    const currentHour = now.getHours();
+    
+    // Se estiver fora do horário de funcionamento
+    if (currentHour < OPERATION_HOURS.start || currentHour >= OPERATION_HOURS.end) {
+        // Redireciona para a página de bloqueio se não estiver nela
+        if (!window.location.pathname.includes('/pages/blocked/blocked.html')) {
+            window.location.href = '/pages/blocked/blocked.html';
+        }
+        return false;
+    }
+    return true;
+}
 
 export function checkMaintenance() {
     if (MAINTENANCE_MODE) {
@@ -21,9 +43,12 @@ export function checkMaintenance() {
     }
 }
 
-// Executar verificação de manutenção automaticamente quando o arquivo for carregado
+// Executar verificação de manutenção e horário de funcionamento automaticamente quando o arquivo for carregado
 if (typeof window !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', checkMaintenance);
+    document.addEventListener('DOMContentLoaded', () => {
+        checkMaintenance();
+        checkOperatingHours();
+    });
 }
 
 // Função para formatar o preço
