@@ -1,5 +1,5 @@
 // Configurações globais
-export const API_URL = 'http://localhost:3000';
+export const API_URL = 'https://max-apiepay.uvxtdw.easypanel.host';
 
 // Configuração do modo de manutenção
 export const MAINTENANCE_MODE = false;
