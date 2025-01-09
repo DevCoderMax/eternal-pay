@@ -81,42 +81,73 @@
     position: relative;
     margin-bottom: 30px;
     padding-left: 120px;
-    opacity: 0.5;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.timeline-item .timeline-icon {
+    position: absolute;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .timeline-item.active {
     opacity: 1;
 }
 
-.timeline-item.active .timeline-icon {
-    background: #1a1a1a;
+.timeline-item.active#stepCreated .timeline-icon {
+    border-color: #ffd700;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.timeline-item.active#stepProcessing .timeline-icon {
+    border-color: #00bfff;
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.3);
+}
+
+.timeline-item.active#stepCompleted .timeline-icon {
     border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
 }
 
 .timeline-item.active#stepCancelled .timeline-icon {
     border-color: #ff4444;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
 }
 
-.timeline-item#stepCancelled .timeline-icon i {
-    color: #ff4444;
+.timeline-item#stepCreated .timeline-icon i { color: #ffd700; }
+.timeline-item#stepProcessing .timeline-icon i { color: #00bfff; }
+.timeline-item#stepCompleted .timeline-icon i { color: #00ff00; }
+.timeline-item#stepCancelled .timeline-icon i { color: #ff4444; }
+
+.timeline-item.cancelled .timeline-icon {
+    border-color: #666666 !important;
+    box-shadow: none !important;
 }
 
-.timeline-icon {
-    position: absolute;
-    left: 35px;
-    width: 30px;
-    height: 30px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
+.timeline-item.cancelled .timeline-icon i {
+    color: #666666 !important;
 }
 
-.timeline-item.completed .timeline-icon {
-    background: #4CAF50;
-    color: #fff;
+.timeline-item.cancelled .timeline-content {
+    color: #666666;
+}
+
+.timeline-item.cancelled .timeline-content h3,
+.timeline-item.cancelled .timeline-content p {
+    color: #666666;
+}
+
+.timeline-item.cancelled #pixPayment {
+    display: none;
 }
 
 .timeline-content {
@@ -307,6 +338,84 @@
 
 .fa-clock {
     color: #ff9900 !important;
+}
+
+/* Animação neon pulsante */
+@keyframes neonPulse {
+    0% {
+        box-shadow: 0 0 5px #00ff00,
+                   0 0 10px #00ff00,
+                   0 0 15px #00ff00;
+    }
+    50% {
+        box-shadow: 0 0 10px #00ff00,
+                   0 0 20px #00ff00,
+                   0 0 30px #00ff00;
+    }
+    100% {
+        box-shadow: 0 0 5px #00ff00,
+                   0 0 10px #00ff00,
+                   0 0 15px #00ff00;
+    }
+}
+
+@keyframes borderPulse {
+    0% {
+        border-color: rgba(0, 255, 0, 0.5);
+    }
+    50% {
+        border-color: rgba(0, 255, 0, 1);
+    }
+    100% {
+        border-color: rgba(0, 255, 0, 0.5);
+    }
+}
+
+/* Estilo especial para status concluído */
+.timeline-item.active#stepCompleted {
+    position: relative;
+}
+
+.timeline-item.active#stepCompleted .timeline-content {
+    border: 2px solid #00ff00;
+    animation: borderPulse 2s infinite ease-in-out;
+    position: relative;
+    overflow: hidden;
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.timeline-item.active#stepCompleted .timeline-icon {
+    animation: neonPulse 2s infinite ease-in-out;
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.timeline-item.active#stepCompleted .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: linear-gradient(45deg, 
+        transparent 0%,
+        rgba(0, 255, 0, 0.1) 50%,
+        transparent 100%
+    );
+    background-size: 200% 200%;
+    animation: gradientMove 3s infinite linear;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 @media (max-width: 768px) {

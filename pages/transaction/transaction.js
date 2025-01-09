@@ -29,6 +29,7 @@ class TransactionStatus {
         this.pixValue = document.getElementById('pixValue');
         this.copyPixCodeButton = document.getElementById('copyPixCode');
         this.copyFeedback = document.getElementById('copyFeedback');
+        this.pixPayment = document.getElementById('pixPayment');
         
         // Timestamps
         this.createdTimeElement = document.getElementById('createdTime');
@@ -52,20 +53,25 @@ class TransactionStatus {
     }
 
     async startStatusCheck() {
-        try {
-            const response = await fetch(`${API_URL}/transacoes/${this.transactionId}`);
-            if (!response.ok) throw new Error('Falha ao obter status da transação');
-            
-            const transaction = await response.json();
-            this.updateStatus(transaction);
+        const checkStatus = async () => {
+            try {
+                const response = await fetch(`${API_URL}/transacoes/${this.transactionId}`);
+                if (!response.ok) throw new Error('Falha ao obter status da transação');
+                
+                const transaction = await response.json();
+                this.updateStatus(transaction);
 
-            // Se a transação não estiver concluída, continua verificando
-            if (transaction.status !== 'concluida' && transaction.status !== 'cancelado') {
-                setTimeout(() => this.startStatusCheck(), 5000); // Verifica a cada 5 segundos
+                // Continua verificando independentemente do status
+                setTimeout(checkStatus, 5000); // Verifica a cada 5 segundos
+            } catch (error) {
+                console.error('Erro ao verificar status:', error);
+                // Em caso de erro, tenta novamente após 5 segundos
+                setTimeout(checkStatus, 5000);
             }
-        } catch (error) {
-            console.error('Erro ao verificar status:', error);
-        }
+        };
+
+        // Inicia o loop de verificação
+        checkStatus();
     }
 
     updateStatus(transaction) {
@@ -80,6 +86,14 @@ class TransactionStatus {
             transaction.moeda_origem === 'BRL' && 
             transaction.moeda_destino === 'BTC') {
             this.generatePixQR(transaction);
+            if (this.pixPayment) {
+                this.pixPayment.style.display = 'block';
+            }
+        } else {
+            // Oculta o QR code se não estiver pendente
+            if (this.pixPayment) {
+                this.pixPayment.style.display = 'none';
+            }
         }
 
         // Limpa todos os estados ativos primeiro
@@ -87,6 +101,11 @@ class TransactionStatus {
         this.stepProcessing.classList.remove('active');
         this.stepCompleted.classList.remove('active');
         this.stepCancelled.classList.remove('active');
+
+        // Remove a classe cancelled de todos os steps
+        this.stepCreated.classList.remove('cancelled');
+        this.stepProcessing.classList.remove('cancelled');
+        this.stepCompleted.classList.remove('cancelled');
 
         // Atualiza timeline baseado no status
         switch (transaction.status) {
@@ -105,13 +124,15 @@ class TransactionStatus {
                 this.stepProcessing.classList.add('active');
                 this.stepCompleted.classList.add('active');
                 this.updateTimestamp(this.createdTimeElement, transaction.criado_em);
-                this.updateTimestamp(this.processingTimeElement, transaction.atualizado_em);
+                this.updateTimestamp(this.processingTimeElement, transaction.processado_em);
                 this.updateTimestamp(this.completedTimeElement, transaction.atualizado_em);
                 break;
             case 'cancelado':
-                this.stepCreated.classList.add('active');
                 this.stepCancelled.classList.add('active');
-                this.updateTimestamp(this.createdTimeElement, transaction.criado_em);
+                // Adiciona a classe cancelled aos steps anteriores
+                this.stepCreated.classList.add('cancelled');
+                this.stepProcessing.classList.add('cancelled');
+                this.stepCompleted.classList.add('cancelled');
                 this.updateTimestamp(this.cancelledTimeElement, transaction.atualizado_em);
                 break;
         }
